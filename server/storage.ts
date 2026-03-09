@@ -1,38 +1,46 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  divisions,
+  members,
+  events,
+  galleryImages,
+  driveLinks,
+  type DivisionWithMembers,
+  type Event,
+  type GalleryImage,
+  type DriveLink,
+} from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getDivisions(): Promise<DivisionWithMembers[]>;
+  getEvents(): Promise<Event[]>;
+  getGallery(): Promise<GalleryImage[]>;
+  getDriveLinks(): Promise<DriveLink[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getDivisions(): Promise<DivisionWithMembers[]> {
+    const allDivisions = await db.select().from(divisions);
+    const allMembers = await db.select().from(members);
+    
+    return allDivisions.map(div => ({
+      ...div,
+      members: allMembers.filter(m => m.divisionId === div.id)
+    }));
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getEvents(): Promise<Event[]> {
+    return await db.select().from(events);
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getGallery(): Promise<GalleryImage[]> {
+    return await db.select().from(galleryImages);
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getDriveLinks(): Promise<DriveLink[]> {
+    return await db.select().from(driveLinks);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
