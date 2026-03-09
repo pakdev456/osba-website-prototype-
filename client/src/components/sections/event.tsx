@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEvents } from "@/hooks/use-api";
-import { Calendar, X, MapPin, Clock } from "lucide-react";
+import { Calendar, X, MapPin, Clock, Camera } from "lucide-react";
 
 export function EventSection() {
   const { data: events, isLoading } = useEvents();
@@ -47,24 +47,8 @@ export function EventSection() {
                 onClick={() => setSelectedEvent(event)}
                 className="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 cursor-pointer group hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col"
               >
-                <div className="h-56 relative overflow-hidden bg-gradient-to-br from-slate-200 to-slate-100">
-                  {event.imageUrl ? (
-                    <>
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
-                      <img 
-                        src={event.imageUrl} 
-                        alt={event.name} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-center">
-                        <Calendar className="w-12 h-12 text-slate-400 mx-auto mb-2" />
-                        <p className="text-slate-400 font-medium text-sm">Gambar akan ditambahkan</p>
-                      </div>
-                    </div>
-                  )}
+                <div className="h-56 relative overflow-hidden bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center group">
+                  <Camera className="w-20 h-20 text-red-600/60 group-hover:text-red-500 transition-colors duration-300" />
                   <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur px-4 py-2 rounded-full flex items-center gap-2 shadow-sm text-sm font-bold text-[#0F172A]">
                     <Calendar className="w-4 h-4 text-blue-600" />
                     {event.date}
@@ -111,24 +95,9 @@ export function EventSection() {
                 <X className="w-6 h-6" />
               </button>
               
-              <div className="h-64 sm:h-80 relative bg-gradient-to-br from-slate-200 to-slate-100">
-                {selectedEvent.imageUrl ? (
-                  <>
-                    <img 
-                      src={selectedEvent.imageUrl} 
-                      alt={selectedEvent.name} 
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
-                  </>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <Calendar className="w-16 h-16 text-slate-400 mx-auto mb-3" />
-                      <p className="text-slate-500 font-medium">Gambar event akan ditambahkan</p>
-                    </div>
-                  </div>
-                )}
+              <div className="h-64 sm:h-80 relative bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center">
+                <Camera className="w-28 h-28 text-red-600/60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 w-full text-white">
                   <h3 className="text-3xl sm:text-4xl font-bold mb-4">{selectedEvent.name}</h3>
                   <div className="flex flex-wrap items-center gap-6 text-sm sm:text-base font-medium text-blue-100">
