@@ -59,16 +59,34 @@ export function Galeri() {
                 className="relative h-48 sm:h-64 md:h-80 rounded-2xl overflow-hidden group cursor-pointer"
               >
                 {/* Image defaults to grayscale, turns color on hover */}
-                <img 
-                  src={item.url} 
-                  alt={item.caption} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <p className="text-white font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {item.caption}
-                  </p>
-                </div>
+                {item.url ? (
+                  <>
+                    <img 
+                      src={item.url} 
+                      alt={item.caption} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                      <p className="text-white font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        {item.caption}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-100 flex items-center justify-center">
+                      <div className="text-center">
+                        <ImageIcon className="w-10 h-10 text-slate-400 mx-auto mb-2" />
+                        <p className="text-slate-400 font-medium text-xs">Belum ada gambar</p>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-100 group-hover:opacity-100 flex items-end p-6">
+                      <p className="text-white font-bold">
+                        {item.caption}
+                      </p>
+                    </div>
+                  </>
+                )}
               </motion.div>
             ))}
           </div>

@@ -41,18 +41,23 @@ async function seedDatabase() {
 
     // 3. Events
     const eventData = [
-      { name: "Muhadhoroh Akbar", description: "Lomba pidato bahasa Arab dan Inggris tingkat pesantren.", imageUrl: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80", date: "15 Agustus 2026" },
-      { name: "Porseni (Pekan Olahraga dan Seni)", description: "Perlombaan antar kamar untuk mengasah bakat olahraga dan seni santri.", imageUrl: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80", date: "10 September 2026" },
-      { name: "Haflah Akhirussanah", description: "Perayaan kelulusan dan penyerahan penghargaan kepada santri berprestasi.", imageUrl: "https://images.unsplash.com/photo-1523580458125-d72b25b6a71e?auto=format&fit=crop&q=80", date: "20 Mei 2027" }
+      { name: "Muhadhoroh Akbar", description: "Lomba pidato bahasa Arab dan Inggris tingkat pesantren yang menghadirkan perwakilan santri terbaik. Kompetisi ini bertujuan untuk meningkatkan kemampuan berbicara dan kepercayaan diri santri dalam berbagai bahasa.", imageUrl: "", date: "15 Agustus 2026" },
+      { name: "Porseni (Pekan Olahraga dan Seni)", description: "Perlombaan antar asrama untuk mengasah bakat olahraga dan seni santri. Terdapat puluhan cabang lomba mulai dari olahraga, musik, tari, hingga kesenian tradisional. Ajang ini menjadi momentum terpenting dalam kalender tahunan pesantren.", imageUrl: "", date: "10 September 2026" },
+      { name: "Haflah Akhirussanah", description: "Perayaan kelulusan dan penyerahan penghargaan kepada santri berprestasi di akhir tahun ajaran. Acara ini dihadiri oleh keluarga santri, guru, dan pimpinan pesantren untuk merayakan pencapaian luar biasa.", imageUrl: "", date: "20 Mei 2027" },
+      { name: "Festival Literasi", description: "Acara pameran buku, bedah buku, dan peluncuran karya tulis santri. Festival ini dirancang untuk meningkatkan minat baca dan tulis di lingkungan pesantren serta memberikan platform bagi santri untuk mempublikasikan karya mereka.", imageUrl: "", date: "15 November 2026" },
+      { name: "Pelatihan Kepemimpinan", description: "Program pelatihan intensif bagi pengurus OSBA dan ketua asrama untuk mengembangkan skill kepemimpinan, manajemen, dan komunikasi efektif. Pelatihan dilakukan oleh narasumber profesional dari luar pesantren.", imageUrl: "", date: "1 Desember 2026" },
+      { name: "Istighosah dan Doa Bersama", description: "Kegiatan spiritual untuk meminta perlindungan dan berkah dari Allah. Seluruh santri dan civitas akademika pesantren berkumpul untuk melakukan istighosah dan doa bersama sebagai bentuk bakti dan rasa syukur.", imageUrl: "", date: "27 Juni 2027" }
     ];
     await db.insert(events).values(eventData);
 
     // 4. Gallery Images
     const galleryData = [
-      { url: "https://images.unsplash.com/photo-1511649475669-e288648b2339?auto=format&fit=crop&q=80", caption: "Kegiatan Belajar" },
-      { url: "https://images.unsplash.com/photo-1427504494785-319ce508ae64?auto=format&fit=crop&q=80", caption: "Upacara Bendera" },
-      { url: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80", caption: "Diskusi Kelompok" },
-      { url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80", caption: "Lomba Pidato" },
+      { url: "", caption: "Kegiatan Belajar" },
+      { url: "", caption: "Upacara Bendera" },
+      { url: "", caption: "Diskusi Kelompok" },
+      { url: "", caption: "Lomba Pidato" },
+      { url: "", caption: "Porseni Olahraga" },
+      { url: "", caption: "Acara Kebersamaan" }
     ];
     await db.insert(galleryImages).values(galleryData);
 
@@ -61,6 +66,8 @@ async function seedDatabase() {
       { title: "Dokumentasi Porseni 2025", url: "https://drive.google.com/drive/folders/dummy1" },
       { title: "Materi Kajian Rutin", url: "https://drive.google.com/drive/folders/dummy2" },
       { title: "SOP OSBA", url: "https://drive.google.com/drive/folders/dummy3" },
+      { title: "Arsip Muhadhoroh Akbar", url: "https://drive.google.com/drive/folders/dummy4" },
+      { title: "Dokumentasi Haflah Akhirussanah", url: "https://drive.google.com/drive/folders/dummy5" }
     ];
     await db.insert(driveLinks).values(driveLinkData);
 
