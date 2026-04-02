@@ -1,35 +1,59 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useDivisions } from "@/hooks/use-api";
 import * as Icons from "lucide-react";
 import { X, ExternalLink } from "lucide-react";
+import eksekutif from "@/data/divisions/eksekutif.json";
+import ibadah from "@/data/divisions/ibadah.json";
+import keamanan from "@/data/divisions/keamanan.json";
+import kebersihan from "@/data/divisions/kebersihan.json";
+import bahasa from "@/data/divisions/bahasa.json";
+import olahraga from "@/data/divisions/olahraga.json";
+import perpustakaan from "@/data/divisions/perpustakaan.json";
+import publikasi from "@/data/divisions/publikasi.json";
+import humas from "@/data/divisions/humas.json";
+
+interface Member {
+  id: number;
+  divisionId: number;
+  role: string;
+  name: string;
+  profileUrl: string;
+}
+
+interface DivisionWithMembers {
+  id: number;
+  name: string;
+  icon: string;
+  color: string;
+  vision: string;
+  mission: string;
+  members: Member[];
+}
 
 // Helper to render dynamic icon from string
 const DynamicIcon = ({ name, color, className }: { name: string, color: string, className?: string }) => {
-  // Convert standard names to PascalCase if needed, or fallback
-  const iconName = name.charAt(0).toUpperCase() + name.slice(1);
-  const IconComponent = (Icons as any)[iconName] || Icons.CircleDot;
+  // Use name as-is from Lucide exports
+  const IconComponent = (Icons as any)[name] || Icons.CircleDot;
   return <IconComponent color={color} className={className} strokeWidth={1.5} />;
 };
 
 export function Divisi() {
-  const { data: divisions, isLoading } = useDivisions();
-  const [selectedDiv, setSelectedDiv] = useState<any | null>(null);
-
-  // Fallback mock data to ensure UI looks gorgeous even if API fails or is empty
-  const mockDivisions = [
-    { id: 1, name: "Keamanan", icon: "Shield", color: "#ef4444", vision: "Menciptakan lingkungan yang aman dan tertib.", mission: "Menegakkan disiplin secara tegas namun mendidik.", members: [{id: 1, role: "Ketua", name: "Ahmad", profileUrl: "#"}, {id: 2, role: "Wakil", name: "Budi", profileUrl: "#"}, {id:3, role:"Anggota", name:"Cipto", profileUrl:"#"}] },
-    { id: 2, name: "Ibadah", icon: "Moon", color: "#10b981", vision: "Meningkatkan kesadaran spiritual santri.", mission: "Mengawal rutinitas ibadah wajib dan sunnah.", members: [] },
-    { id: 3, name: "Bahasa", icon: "Languages", color: "#3b82f6", vision: "Mewujudkan lingkungan bilingual.", mission: "Mengadakan program bahasa interaktif.", members: [] },
-    { id: 4, name: "Kebersihan", icon: "Leaf", color: "#f59e0b", vision: "Pondok bersih dan nyaman.", mission: "Gotong royong rutin harian.", members: [] },
-    { id: 5, name: "Olahraga", icon: "Trophy", color: "#8b5cf6", vision: "Santri sehat dan bugar.", mission: "Turnamen olahraga antar asrama.", members: [] },
-    { id: 6, name: "Publikasi", icon: "Camera", color: "#ec4899", vision: "Dokumentasi kegiatan santri.", mission: "Mengelola sosial media dan majalah.", members: [] }
-  ];
-
-  const displayData = divisions && divisions.length > 0 ? divisions : mockDivisions;
+  const [selectedDiv, setSelectedDiv] = useState<DivisionWithMembers | null>(null);
+  const displayData: DivisionWithMembers[] = [
+    eksekutif,
+    ibadah,
+    keamanan,
+    kebersihan,
+    bahasa,
+    olahraga,
+    perpustakaan,
+    publikasi,
+    humas,
+  ] as DivisionWithMembers[];
 
   return (
-    <section className="py-24 bg-white relative">
+    <>
+      <section className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-[#0F172A] mb-4">Divisi OSBA</h2>
@@ -37,20 +61,13 @@ export function Divisi() {
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full mt-6"></div>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-              <div key={i} className="h-48 bg-slate-100 animate-pulse rounded-3xl"></div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {displayData.map((divisi: any, idx: number) => (
-              <DivisionCard key={divisi.id} divisi={divisi} index={idx} onClick={() => setSelectedDiv(divisi)} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+          {displayData.map((item, idx) => (
+            <DivisionCard key={item.id} divisi={item} index={idx} onClick={() => setSelectedDiv(item)} />
+          ))}
+        </div>
       </div>
+      </section>
 
       {/* Complex Modal for Division Detail */}
       <AnimatePresence>
@@ -75,10 +92,13 @@ export function Divisi() {
                 style={{ backgroundColor: `${selectedDiv.color}15` }}
               >
                 <button 
-                  onClick={() => setSelectedDiv(null)}
-                  className="absolute top-6 right-6 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedDiv(null);
+                  }}
+                  className="absolute top-6 right-6 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg hover:scale-110 transition-all z-50 cursor-pointer"
                 >
-                  <X className="w-5 h-5 text-slate-600" />
+                  <X className="w-5 h-5 text-slate-600 hover:text-slate-900" />
                 </button>
                 <div className="flex items-center gap-6 relative z-10">
                   <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-md">
@@ -111,7 +131,7 @@ export function Divisi() {
                   <h4 className="font-bold text-xl text-[#0F172A] mb-6 border-b pb-4">Struktur Anggota</h4>
                   {selectedDiv.members && selectedDiv.members.length > 0 ? (
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      {selectedDiv.members.map((member: any) => (
+                      {selectedDiv.members.map((member) => (
                         <a 
                           key={member.id} 
                           href={member.profileUrl} 
@@ -139,12 +159,12 @@ export function Divisi() {
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   );
 }
 
 // Subcomponent for the interactive card
-function DivisionCard({ divisi, index, onClick }: { divisi: any, index: number, onClick: () => void }) {
+function DivisionCard({ divisi, index, onClick }: { divisi: DivisionWithMembers, index: number, onClick: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

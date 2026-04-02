@@ -1,43 +1,38 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEvents } from "@/hooks/use-api";
 import { Calendar, X, MapPin, Clock, Camera } from "lucide-react";
+import eventsData from "@/data/events.json";
+
+interface Event {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  imageUrl: string;
+}
 
 export function EventSection() {
-  const { data: events, isLoading } = useEvents();
-  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
-
-  // Mock data for visual completeness
-  const mockEvents = [
-    { id: 1, name: "Pekan Olahraga & Seni (PORSENI)", date: "15 Agustus 2026", description: "Ajang unjuk bakat santri dalam bidang olahraga dan seni. Memperebutkan piala bergilir antar asrama dengan puluhan cabang lomba.", imageUrl: "https://images.unsplash.com/photo-1526676037777-05a232554f77?w=800&q=80" },
-    { id: 2, name: "Muhadhoroh Akbar", date: "10 September 2026", description: "Pidato tiga bahasa (Arab, Inggris, Indonesia) yang ditampilkan oleh perwakilan santri terbaik di hadapan seluruh civitas akademika.", imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&q=80" },
-    { id: 3, name: "Festival Literasi", date: "22 Oktober 2026", description: "Pameran buku, bedah buku, dan peluncuran karya tulis santri. Bertujuan meningkatkan minat baca dan tulis di lingkungan pondok.", imageUrl: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80" },
-  ];
-
-  const displayData = events && events.length > 0 ? events : mockEvents;
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const displayData: Event[] = eventsData;
 
   return (
-    <section className="py-24 bg-slate-50 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <section className="py-24 bg-slate-50 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h2 className="text-4xl font-bold text-[#0F172A] mb-4">Agenda Event</h2>
             <div className="w-24 h-1 bg-blue-600 rounded-full"></div>
           </div>
           <p className="text-slate-500 max-w-md text-lg">
-            Program kerja unggulan yang akan dilaksanakan selama masa bakti 2026-2027.
+            Event OSBA yang akan dilaksanakan pada periode ini 
           </p>
         </div>
 
-        {isLoading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-96 bg-slate-200 animate-pulse rounded-3xl"></div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayData.map((event: any, idx: number) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {displayData.map((event, idx) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -47,8 +42,14 @@ export function EventSection() {
                 onClick={() => setSelectedEvent(event)}
                 className="bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 cursor-pointer group hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col"
               >
-                <div className="h-56 relative overflow-hidden bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center group">
-                  <Camera className="w-20 h-20 text-red-600/60 group-hover:text-red-500 transition-colors duration-300" />
+                <div className="h-56 relative overflow-hidden bg-slate-100 flex items-center justify-center group">
+                  {event.imageUrl ? (
+                    <img src={event.imageUrl} alt={event.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center">
+                      <Camera className="w-20 h-20 text-red-600/60 group-hover:text-red-500 transition-colors duration-300" />
+                    </div>
+                  )}
                   <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur px-4 py-2 rounded-full flex items-center gap-2 shadow-sm text-sm font-bold text-[#0F172A]">
                     <Calendar className="w-4 h-4 text-blue-600" />
                     {event.date}
@@ -68,10 +69,9 @@ export function EventSection() {
               </motion.div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* Modal Detailed Event */}
       <AnimatePresence>
         {selectedEvent && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -95,8 +95,14 @@ export function EventSection() {
                 <X className="w-6 h-6" />
               </button>
               
-              <div className="h-64 sm:h-80 relative bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center">
-                <Camera className="w-28 h-28 text-red-600/60" />
+              <div className="h-64 sm:h-80 relative bg-slate-100 flex items-center justify-center">
+                {selectedEvent.imageUrl ? (
+                  <img src={selectedEvent.imageUrl} alt={selectedEvent.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center">
+                    <Camera className="w-28 h-28 text-red-600/60" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-8 w-full text-white">
                   <h3 className="text-3xl sm:text-4xl font-bold mb-4">{selectedEvent.name}</h3>
@@ -105,10 +111,10 @@ export function EventSection() {
                       <Calendar className="w-5 h-5" /> {selectedEvent.date}
                     </span>
                     <span className="flex items-center gap-2">
-                      <MapPin className="w-5 h-5" /> Area Pesantren
+                      <MapPin className="w-5 h-5" /> {selectedEvent.location}
                     </span>
                     <span className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" /> 08:00 WIB - Selesai
+                      <Clock className="w-5 h-5" /> {selectedEvent.time}
                     </span>
                   </div>
                 </div>
@@ -124,6 +130,6 @@ export function EventSection() {
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   );
 }

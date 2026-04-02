@@ -1,0 +1,31 @@
+{
+  "id": 3,
+  "name": "Keamanan",
+  "icon": "Shield",
+  "color": "#ef4444",
+  "vision": "Menciptakan lingkungan yang aman dan tertib.",
+  "mission": "Menegakkan disiplin secara tegas namun mendidik.",
+  "members": [
+    {
+      "id": 1,
+      "divisionId": 3,
+      "role": "Ketua",
+      "name": "Ahmad",
+      "profileUrl": "#"
+    },
+    {
+      "id": 2,
+      "divisionId": 3,
+      "role": "Wakil",
+      "name": "Budi",
+      "profileUrl": "#"
+    },
+    {
+      "id": 3,
+      "divisionId": 3,
+      "role": "Anggota",
+      "name": "Cipto",
+      "profileUrl": "#"
+    }
+  ]
+}

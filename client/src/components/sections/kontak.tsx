@@ -3,11 +3,11 @@ import { Mail, Instagram, Youtube, Globe, ArrowUpRight } from "lucide-react";
 
 export function Kontak() {
   const contactLinks = [
-    { name: "Email", value: "osba@babussalam.edu", icon: <Mail className="w-8 h-8" />, href: "mailto:osba@babussalam.edu" },
-    { name: "Instagram Mahad", value: "@mahad_babussalam", icon: <Instagram className="w-8 h-8" />, href: "#" },
-    { name: "Instagram OSBA", value: "@osba_official", icon: <Instagram className="w-8 h-8" />, href: "#" },
-    { name: "YouTube", value: "Babussalam TV", icon: <Youtube className="w-8 h-8" />, href: "#" },
-    { name: "Website", value: "www.babussalam.edu", icon: <Globe className="w-8 h-8" />, href: "#" },
+    { name: "Email", value: "babussalamsc26", icon: <Mail className="w-8 h-8" />, href: "mailto:babussalamsc26@gmail.com" },
+    { name: "Instagram Mahad", value: "babussalam as-sunnah", icon: <Instagram className="w-8 h-8" />, href: "https://www.instagram.com/babussalam_assunnah/" },
+    { name: "Instagram OSBA", value:"babussalamsc", icon: <Instagram className="w-8 h-8" />, href: "https://www.instagram.com/babussalamsc/" },
+    { name: "YouTube", value: "Babussalam As-sunnah", icon: <Youtube className="w-8 h-8" />, href: "https://www.youtube.com/c/BabussalamAsSunnah" },
+    { name: "Website", value: "babussalam.sch.id", icon: <Globe className="w-8 h-8" />, href: "https://babussalam.sch.id/" },
   ];
 
   return (

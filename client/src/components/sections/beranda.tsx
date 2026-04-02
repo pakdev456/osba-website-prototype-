@@ -13,16 +13,16 @@ export function Beranda() {
   };
 
   return (
-    <section className="py-24 bg-white relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="pt-16 pb-20 bg-white relative">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-4">Pengenalan Singkat</h2>
-          <p className="text-xl md:text-3xl text-slate-700 leading-relaxed text-balance mb-12 font-medium">
+          <p className="text-xl md:text-3xl text-slate-700 leading-relaxed text-balance mb-8 font-medium">
             OSBA hadir sebagai wadah kreativitas, kepemimpinan, dan pengembangan karakter bagi seluruh santri. Bersama membangun ekosistem madrasah yang disiplin, islami, dan berprestasi.
           </p>
 

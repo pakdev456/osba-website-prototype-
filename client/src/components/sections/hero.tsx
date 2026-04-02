@@ -15,7 +15,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mx-auto w-24 h-24 md:w-32 md:h-32 bg-[#0F172A] rounded-3xl flex items-center justify-center mb-8 shadow-2xl shadow-blue-900/20 rotate-3 hover:rotate-0 transition-transform duration-500"
+          className="mx-auto w-24 h-24 md:w-32 md:h-32 bg-[#0F172A] rounded-3xl flex items-center justify-center mb-4 shadow-2xl shadow-blue-900/20 rotate-3 hover:rotate-0 transition-transform duration-500"
         >
           <GraduationCap className="w-12 h-12 md:w-16 md:h-16 text-white" strokeWidth={1.5} />
         </motion.div>

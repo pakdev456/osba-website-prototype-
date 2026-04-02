@@ -1,32 +1,37 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGallery, useDriveLinks } from "@/hooks/use-api";
-import { Camera, FolderOpen, ExternalLink, X } from "lucide-react";
+import { Camera, FolderOpen, ExternalLink, X, Image as ImageIcon } from "lucide-react";
+import driveLinksData from "@/data/drive-links.json";
+
+interface GalleryImage {
+  id: number;
+  url: string;
+  caption: string;
+}
+
+interface DriveLink {
+  id: number;
+  title: string;
+  url: string;
+}
 
 export function Galeri() {
-  const { data: gallery, isLoading: galleryLoading } = useGallery();
-  const { data: driveLinks } = useDriveLinks();
   const [showDriveModal, setShowDriveModal] = useState(false);
 
   // Mock data
-  const mockGallery = [
-    { id: 1, url: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80", caption: "Kegiatan Belajar" },
-    { id: 2, url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80", caption: "Upacara Pagi" },
-    { id: 3, url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&q=80", caption: "Diskusi Kelompok" },
-    { id: 4, url: "https://images.unsplash.com/photo-1511629091441-ee46146481b6?w=800&q=80", caption: "Olahraga" },
+  const mockGallery: GalleryImage[] = [
+    { id: 1, url: "", caption: "Kegiatan Belajar" },
+    { id: 2, url: "", caption: "Upacara Pagi" },
+    { id: 3, url: "", caption: "Diskusi Kelompok" },
+    { id: 4, url: "", caption: "Olahraga" },
   ];
 
-  const mockLinks = [
-    { id: 1, title: "Dokumentasi PORSENI 2025", url: "#" },
-    { id: 2, title: "Arsip Kajian Kitab", url: "#" },
-    { id: 3, title: "Foto Kelulusan Angkatan", url: "#" },
-  ];
-
-  const displayGallery = gallery && gallery.length > 0 ? gallery : mockGallery;
-  const displayLinks = driveLinks && driveLinks.length > 0 ? driveLinks : mockLinks;
+  const displayGallery: GalleryImage[] = mockGallery;
+  const displayLinks: DriveLink[] = driveLinksData;
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <>
+      <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-96 bg-slate-50 -z-10 skew-y-2 origin-top-left"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,13 +48,8 @@ export function Galeri() {
           </button>
         </div>
 
-        {galleryLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1,2,3,4].map(i => <div key={i} className="h-64 bg-slate-200 animate-pulse rounded-2xl"></div>)}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {displayGallery.map((item: any, idx: number) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {displayGallery.map((item, idx) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -58,8 +58,11 @@ export function Galeri() {
                 transition={{ delay: idx * 0.1 }}
                 className="relative h-48 sm:h-64 md:h-80 rounded-2xl overflow-hidden group cursor-pointer bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center"
               >
-                {/* Camera icon in the center */}
-                <Camera className="w-16 h-16 text-red-600/60 group-hover:text-red-500 transition-colors duration-300" />
+                {item.url ? (
+                  <img src={item.url} alt={item.caption} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                ) : (
+                  <Camera className="w-16 h-16 text-red-600/60 group-hover:text-red-500 transition-colors duration-300" />
+                )}
                 
                 {/* Caption overlay at bottom */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-100 flex items-end p-6">
@@ -70,8 +73,8 @@ export function Galeri() {
               </motion.div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
       {/* Drive Links Modal */}
       <AnimatePresence>
@@ -105,7 +108,7 @@ export function Galeri() {
               <div className="p-6 sm:p-8 bg-slate-50 min-h-[300px]">
                 {displayLinks.length > 0 ? (
                   <div className="flex flex-col gap-4">
-                    {displayLinks.map((link: any) => (
+                    {displayLinks.map((link: DriveLink) => (
                       <a 
                         key={link.id}
                         href={link.url}
@@ -133,6 +136,6 @@ export function Galeri() {
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   );
 }

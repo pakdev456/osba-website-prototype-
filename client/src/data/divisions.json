@@ -1,0 +1,105 @@
+[
+  {
+    "id": 1,
+    "name": "Eksekutif",
+    "icon": "Crown",
+    "color": "#f59e0b",
+    "vision": "Memimpin dan mengkoordinasikan seluruh kegiatan OSBA.",
+    "mission": "Menjalankan mandat dengan integritas dan transparansi.",
+    "members": []
+  },
+  {
+    "id": 2,
+    "name": "Ibadah",
+    "icon": "BookOpen",
+    "color": "#10b981",
+    "vision": "Meningkatkan kesadaran spiritual santri.",
+    "mission": "Mengawal rutinitas ibadah wajib dan sunnah.",
+    "members": []
+  },
+  {
+    "id": 3,
+    "name": "Keamanan",
+    "icon": "Shield",
+    "color": "#ef4444",
+    "vision": "Menciptakan lingkungan yang aman dan tertib.",
+    "mission": "Menegakkan disiplin secara tegas namun mendidik.",
+    "members": [
+      {
+        "id": 1,
+        "divisionId": 3,
+        "role": "Ketua",
+        "name": "Ahmad",
+        "profileUrl": "#"
+      },
+      {
+        "id": 2,
+        "divisionId": 3,
+        "role": "Wakil",
+        "name": "Budi",
+        "profileUrl": "#"
+      },
+      {
+        "id": 3,
+        "divisionId": 3,
+        "role": "Anggota",
+        "name": "Cipto",
+        "profileUrl": "#"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Kebersihan",
+    "icon": "Sparkles",
+    "color": "#3b82f6",
+    "vision": "Pondok bersih dan nyaman.",
+    "mission": "Gotong royong rutin harian.",
+    "members": []
+  },
+  {
+    "id": 5,
+    "name": "Bahasa",
+    "icon": "Languages",
+    "color": "#6366f1",
+    "vision": "Mewujudkan lingkungan bilingual.",
+    "mission": "Mengadakan program bahasa interaktif.",
+    "members": []
+  },
+  {
+    "id": 6,
+    "name": "Olahraga",
+    "icon": "Trophy",
+    "color": "#f97316",
+    "vision": "Santri sehat dan bugar.",
+    "mission": "Turnamen olahraga antar asrama.",
+    "members": []
+  },
+  {
+    "id": 7,
+    "name": "Perpustakaan",
+    "icon": "BarChart3",
+    "color": "#eab308",
+    "vision": "Menyediakan akses informasi dan ilmu pengetahuan.",
+    "mission": "Mengelola koleksi buku dan mendukung literasi.",
+    "members": []
+  },
+  {
+    "id": 8,
+    "name": "Publikasi",
+    "icon": "Megaphone",
+    "color": "#a855f7",
+    "vision": "Dokumentasi kegiatan santri.",
+    "mission": "Mengelola sosial media dan majalah.",
+    "members": []
+  },
+  {
+    "id": 9,
+    "name": "Humas",
+    "icon": "Users",
+    "color": "#ec4899",
+    "vision": "Membangun hubungan harmonis dengan komunitas.",
+    "mission": "Menjalin komunikasi strategis dan partnership.",
+    "members": []
+  }
+]
