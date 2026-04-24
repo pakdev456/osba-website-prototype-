@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-// Image as requested by user - using as a visual accent if available
-import navBgImage from "@assets/Screenshot_2026-03-09_091032_1773022242412.png";
 
 const navLinks = [
   { name: "Beranda", href: "#beranda" },
