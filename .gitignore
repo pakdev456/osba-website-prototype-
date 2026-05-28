@@ -9,4 +9,6 @@ vite.config.ts.*
 
 .vercel
 .env*.local
+
+#env files
 .env
