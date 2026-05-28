@@ -23,9 +23,8 @@ export function Beranda() {
         >
           <h2 className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-4">Pengenalan Singkat</h2>
           <p className="text-xl md:text-3xl text-slate-700 leading-relaxed text-balance mb-8 font-medium">
-            OSBA hadir sebagai wadah kreativitas, kepemimpinan, dan pengembangan karakter bagi seluruh santri. Bersama membangun ekosistem madrasah yang disiplin, islami, dan berprestasi.
+            OSBA. Adalah Organisasi yang berperan sebagai sarana pembelajaran dalam berorganisasi dan penghubung aspirasi, dengan menerapkan nilai-nilai Al-Qur’an dan Sunnah guna membantu merealisasikan tujuan ma’had Babussalam
           </p>
-
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={() => scrollToSection('#profil')}
