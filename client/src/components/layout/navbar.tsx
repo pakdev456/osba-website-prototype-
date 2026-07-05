@@ -57,7 +57,7 @@ export function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <div className="w-10 h-10 bg-[#0F172A] rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/20">
-              <span className="text-white font-bold text-lg font-display">O</span>
+            <link rel="icon" type="image/svg+xml" href="/trace.svg" />
             </div>
             <span className="font-display font-bold text-2xl text-[#0F172A] tracking-tight">OSBA</span>
           </div>
